@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 exports.getLogin = (req, res) => {
     if (req.session.user) {
-        return res.redirect('/');
+        return res.redirect('/home');
     }
     res.render('login', { error: null });
 };
@@ -13,7 +13,7 @@ exports.postLogin = async (req, res) => {
         const user = await User.findOne({ where: { username, password } });
         if (user) {
             req.session.user = user;
-            res.redirect('/');
+            res.redirect('/home');
         } else {
             res.render('login', { error: 'Username atau password salah' });
         }

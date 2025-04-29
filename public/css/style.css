@@ -1,0 +1,575 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-dark);
+    transition: background-color 0.3s ease;
+}
+
+:root {
+    /* Skema warna gradien */
+    --gradient-start: #8e2de2;
+    --gradient-end: #4a00e0;
+    --gradient-accent: #6a11cb;
+    
+    /* Warna latar */
+    --background-dark: #0f0326;
+    --card-background: rgba(25, 13, 51, 0.85);
+    --input-background: rgba(43, 24, 76, 0.7);
+    --input-focus: rgba(56, 31, 95, 0.9);
+    
+    /* Warna teks */
+    --text-light: #ffffff;
+    --text-highlight: #f3cbff;
+    --text-muted: #c1b3e2;
+    --text-footer: #9786c6;
+    
+    /* Warna aksen */
+    --accent-color: #ff7eb3;
+    --accent-hover: #ff5ca3;
+    --accent-secondary: #7efff5;
+    
+    /* Bayangan */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --glow-color: rgba(142, 45, 226, 0.4);
+}
+
+.container {
+    display: flex;
+    height: 100vh; /* tetap full tinggi */
+    overflow: hidden; /* jangan scroll seluruh container */
+    transition: all 0.3s ease;
+}
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-light);
+    padding: 20px;
+    flex-shrink: 0; /* sidebar tidak mengecil */
+    position: sticky; /* tetap nempel */
+    top: 0;
+    height: 100vh; /* penuh satu layar */
+    overflow-y: auto; /* kalau sidebar isinya banyak, scroll sidebar */
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: var(--text-highlight);
+    transition: color 0.3s ease;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-highlight);
+    transform: translateX(5px);
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: var(--background-dark);
+    overflow-y: auto; /* hanya content yang scroll */
+    height: 100vh; /* supaya bisa scroll penuh */
+    transition: all 0.5s ease;
+    will-change: transform, opacity;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.card {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-color), 0 0 10px var(--glow-color);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    animation: cardFadeIn 0.5s ease-in-out;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--accent-color), var(--gradient-accent));
+    color: var(--text-light);
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(142, 45, 226, 0.3);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, var(--accent-hover), var(--gradient-start));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(142, 45, 226, 0.4);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    transition: all 0.3s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+thead {
+    background-color: var(--input-background);
+    transition: background-color 0.3s ease;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.pagination {
+    text-align: right;
+    transition: all 0.3s ease;
+}
+
+.pagination button {
+    background-color: var(--input-background);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-left: 5px;
+    cursor: not-allowed;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.dashboard-summary {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, var(--card-background), rgba(35, 19, 71, 0.8));
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px var(--shadow-color), 0 0 10px var(--glow-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    animation: cardAppear 0.5s ease-in-out;
+}
+
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.summary-card h3 {
+    margin: 0;
+    font-size: 36px;
+    color: var(--accent-secondary);
+    text-shadow: 0 0 10px rgba(126, 255, 245, 0.5);
+    transition: all 0.3s ease;
+}
+
+.summary-card p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.card-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--gradient-accent));
+    color: var(--text-light);
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(142, 45, 226, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--gradient-start));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(142, 45, 226, 0.4);
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.table-controls select, .table-controls input {
+    padding: 4px 8px;
+    margin-left: 5px;
+    background-color: var(--input-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table th, table td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    text-align: center;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+table th {
+    background-color: var(--input-background);
+    font-weight: bold;
+    color: var(--text-highlight);
+    transition: background-color 0.3s ease;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    background-color: var(--input-background);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--input-focus);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Tambahan CSS untuk halaman About Us */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    animation: contentFadeIn 0.4s ease-out;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sidebar-header h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: var(--text-highlight);
+    transition: color 0.3s ease;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-footer);
+    transition: color 0.3s ease;
+}
+
+.photoCard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+
+.photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 5px 15px var(--shadow-color), 0 0 10px var(--glow-color);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    animation: photoAppear 0.6s ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes photoAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animation for photos */
+.photos:nth-child(1) { animation-delay: 0.1s; }
+.photos:nth-child(2) { animation-delay: 0.2s; }
+.photos:nth-child(3) { animation-delay: 0.3s; }
+.photos:nth-child(4) { animation-delay: 0.4s; }
+.photos:nth-child(5) { animation-delay: 0.5s; }
+.photos:nth-child(6) { animation-delay: 0.6s; }
+
+.photos:hover {
+    transform: translateY(-5px);
+}
+
+.photos img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.photos h6 {
+    margin: 15px 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-highlight);
+    transition: color 0.3s ease;
+}
+
+.photos p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 15px 0;
+    transition: background-color 0.3s ease;
+}
+
+section.card h3 {
+    color: var(--accent-secondary);
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(126, 255, 245, 0.3);
+    transition: color 0.3s ease;
+}
+
+/* Page transition styles */
+.page-transition {
+    position: relative;
+}
+
+.page-transition::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-dark);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.page-transition.active::after {
+    opacity: 1;
+}
+
+/* Add this script to your HTML to enable smooth page transitions */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .photoCard {
+        gap: 10px;
+    }
+    
+    .photos {
+        width: 150px;
+    }
+}
+
+/* baru */
+/* Tambahan CSS untuk Tabel Kriteria dan Penilaian */
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.table-responsive table {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.table-responsive thead {
+    background-color: var(--input-background);
+    transition: background-color 0.3s ease;
+}
+
+.table-responsive th, 
+.table-responsive td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.table-responsive tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table-responsive tbody tr:hover {
+    background-color: var(--input-focus);
+}
+
+.table-responsive tbody td:first-child {
+    font-weight: bold;
+    color: var(--accent-secondary);
+    transition: color 0.3s ease;
+}
+
+.card + .card {
+    margin-top: 30px;
+}
+
+/* JavaScript should be added to handle page transitions smoothly */

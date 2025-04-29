@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const authController = require('../controllers/authController');
+const homeController = require('../controllers/homeController');
 // const kriteriaController = require('../controllers/kriteriaController');
 // const nilaiKriteriaController = require('../controllers/nilaiKriteriaController');
 // const alternatifController = require('../controllers/alternatifController');
@@ -10,6 +11,9 @@ const authController = require('../controllers/authController');
 router.get('/', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.get('/logout', authController.logout);
+
+router.get('/home', homeController.getJumlahAlternatif);
+
 // router.get('/kriteria-bobot', kriteriaController.getKriteriaBobot);
 // router.get('/nilai-kriteria', nilaiKriteriaController.getNilaiKriteriaBobot);
 // router.get('/alternatif', alternatifController.getAlternatif);
