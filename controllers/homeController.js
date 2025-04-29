@@ -1,9 +1,9 @@
 const Alternatif = require('../models/Alternatif');
 
 exports.getJumlahAlternatif = async (req, res) => {
-    // if(!req.session.user) {
-    //     return res.redirect('/');
-    // }
+    if(!req.session.user) {
+        return res.redirect('/');
+    }
     
     try{
         const jumlahAlternatif = await Alternatif.count();
