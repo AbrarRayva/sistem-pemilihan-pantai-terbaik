@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kriteria</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <%- include('partials/sidebar'); %>        
+        <main class="content">
+            <h1>Kriteria & Sub Kriteria</h1>
+            <div class="card">
+                <h2>Kriteria</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Nama Kriteria</th>
+                            <th>Bobot</th>
+                            <th>Tipe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% kriteria.forEach(k => { %>
+                            <tr>
+                                <td><%= k.kode %></td>
+                                <td><%= k.nama %></td>
+                                <td><%= k.bobot %></td>
+                                <td><%= k.tipe %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h2>Sub Kriteria</h2>
+                <% kriteria.forEach(k => { %>
+                    <h3><%= k.kode %> - <%= k.nama %></h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Deskripsi Sub Kriteria</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% const subs = subKriteria.find(sk => sk.kode === k.kode); %>
+                            <% if (subs && subs.penilaian) { %>
+                                <% subs.penilaian.forEach((sub, index) => { %>
+                                    <tr>
+                                        <td><%= sub.deskripsi %></td>
+                                        <td><%= sub.nilai %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="3">Tidak ada sub kriteria</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                    <p style="color: aliceblue;"><i><%- subs.penjelasan %></i></p>
+                    <br>
+                <% }); %>
+            </div>
+        </main>
+    </div>
+</body>

@@ -3,8 +3,7 @@ const router = express.Router();
 
 const authController = require('../controllers/authController');
 const homeController = require('../controllers/homeController');
-// const kriteriaController = require('../controllers/kriteriaController');
-// const nilaiKriteriaController = require('../controllers/nilaiKriteriaController');
+const kriteriaController = require('../controllers/kriteriaController');
 // const alternatifController = require('../controllers/alternatifController');
 // const analisisController = require('../controllers/analisisController');
 
@@ -14,8 +13,7 @@ router.get('/logout', authController.logout);
 
 router.get('/home', homeController.getJumlahAlternatif);
 
-// router.get('/kriteria-bobot', kriteriaController.getKriteriaBobot);
-// router.get('/nilai-kriteria', nilaiKriteriaController.getNilaiKriteriaBobot);
+router.get('/kriteria', kriteriaController.getKriteria);
 // router.get('/alternatif', alternatifController.getAlternatif);
 // router.post('/alternatif', alternatifController.postAlternatif);
 // router.get('/alternatif/edit/:id', alternatifController.getEditAlternatif);
